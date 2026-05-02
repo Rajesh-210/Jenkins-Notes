@@ -281,3 +281,446 @@ Modern Jenkins avoids using the term "slave".
 # Conclusion
 
 Jenkins Master-Agent architecture is used to distribute workloads efficiently across multiple machines. The master manages and schedules jobs, while agents perform actual execution tasks such as build, test, and deployment. SSH-based communication provides secure and automated remote execution between the master and agents.
+
+---
+
+# Additional DevOps Interview Topics
+
+# 1. Configuration Management
+
+## Definition
+
+Configuration management is the process of managing and maintaining server configurations automatically.
+
+Instead of manually installing packages and configuring services on multiple servers, automation tools are used.
+
+## Common Tools
+
+* Ansible
+* Chef
+* Puppet
+* SaltStack
+
+## Practical Example
+
+Installing Nginx on 50 servers automatically using Ansible.
+
+## Interview Answer
+
+> Configuration management means maintaining infrastructure in a consistent and automated way using tools like Ansible.
+
+---
+
+# 2. Jenkins Integration
+
+## Definition
+
+Integration means connecting Jenkins with external tools for CI/CD automation.
+
+## Common Integrations
+
+| Tool       | Purpose                |
+| ---------- | ---------------------- |
+| GitHub     | Source code management |
+| Docker     | Containerization       |
+| Kubernetes | Deployment             |
+| SonarQube  | Code quality analysis  |
+| Slack      | Notifications          |
+
+## Example Flow
+
+```text
+GitHub → Jenkins → Docker → Kubernetes
+```
+
+## Interview Answer
+
+> Jenkins integration means connecting Jenkins with tools like GitHub, Docker, Kubernetes, and SonarQube to automate the software delivery process.
+
+---
+
+# 3. User Management in Jenkins
+
+## Definition
+
+User management controls authentication and authorization inside Jenkins.
+
+## Examples
+
+| Role      | Permissions              |
+| --------- | ------------------------ |
+| Admin     | Full access              |
+| Developer | Build and configure jobs |
+| Tester    | View reports             |
+
+## Interview Answer
+
+> Jenkins user management is used to control access and permissions for different users using role-based access control.
+
+---
+
+# 4. Credentials Management
+
+## Definition
+
+Credentials management securely stores secrets inside Jenkins.
+
+## Examples
+
+* GitHub token
+* SSH keys
+* Docker Hub credentials
+* AWS access keys
+
+## Jenkins Path
+
+```text
+Manage Jenkins
+→ Credentials
+```
+
+## Why Important?
+
+* Avoid hardcoding passwords
+* Secure deployments
+* Secure repository access
+
+## Interview Answer
+
+> Credentials management securely stores passwords, SSH keys, and tokens used in pipelines.
+
+---
+
+# 5. Jenkins Pipeline
+
+## Definition
+
+A Jenkins pipeline is an automated workflow that defines build, test, and deployment stages.
+
+## Pipeline Flow
+
+```text
+Build → Test → Deploy
+```
+
+## Basic Declarative Pipeline
+
+```groovy
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building Application'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running Tests'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying Application'
+            }
+        }
+    }
+}
+```
+
+---
+
+# 6. Post Failure Trigger in Jenkins
+
+## Example
+
+```groovy
+post {
+    failure {
+        echo 'Build Failed'
+    }
+}
+```
+
+## Use Cases
+
+* Send email notification
+* Slack alert
+* Stop deployment
+
+## Interview Answer
+
+> Jenkins post-failure actions are used to handle failed stages and send alerts or stop further execution.
+
+---
+
+# 7. Pipeline Models
+
+## Types of Pipelines
+
+| Type                 | Description               |
+| -------------------- | ------------------------- |
+| Declarative Pipeline | Simple and structured     |
+| Scripted Pipeline    | Advanced Groovy scripting |
+
+## Declarative Example
+
+```groovy
+pipeline {
+    agent any
+}
+```
+
+## Scripted Example
+
+```groovy
+node {
+    stage('Build') {
+        echo 'Building'
+    }
+}
+```
+
+## Interview Answer
+
+> Jenkins supports Declarative and Scripted pipelines. Declarative is simpler while Scripted provides advanced flexibility.
+
+---
+
+# 8. GitHub Jenkinsfile Execution
+
+## Flow
+
+```text
+GitHub Repository
+        ↓
+Jenkins pulls Jenkinsfile
+        ↓
+Pipeline executes
+```
+
+## Example Jenkinsfile
+
+```groovy
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Hello Jenkins'
+            }
+        }
+    }
+}
+```
+
+## Jenkins Steps
+
+```text
+New Item
+→ Pipeline
+→ Pipeline Script from SCM
+→ Git
+→ Paste Repository URL
+```
+
+## Interview Answer
+
+> Jenkins can automatically execute pipelines stored inside GitHub using a Jenkinsfile.
+
+---
+
+# 9. Find Highest Storage Used Files
+
+## Command
+
+```bash
+du -ah / | sort -rh | head -10
+```
+
+## Explanation
+
+| Command  | Meaning            |
+| -------- | ------------------ |
+| du       | Disk usage         |
+| sort -rh | Sort largest first |
+| head     | Show top results   |
+
+---
+
+# 10. Bash Scripting
+
+## Definition
+
+Bash scripting automates Linux tasks using shell commands.
+
+## Example Script
+
+```bash
+#!/bin/bash
+
+echo "Backup Started"
+
+tar -czf backup.tar.gz /data
+
+echo "Backup Completed"
+```
+
+## Use Cases
+
+* Backups
+* Monitoring
+* Automation
+* Deployment
+
+## Interview Answer
+
+> Bash scripting automates repetitive Linux administration tasks.
+
+---
+
+# 11. File Transfer Between Servers
+
+## Methods
+
+* SCP
+* RSYNC
+* SSH
+
+## Example
+
+```bash
+scp file.txt ubuntu@server2:/tmp
+```
+
+## Interview Answer
+
+> Files can be securely transferred between servers using SCP or RSYNC over SSH.
+
+---
+
+# 12. Bash Conditional Statements
+
+## Example
+
+```bash
+if [ $? -eq 0 ]
+then
+   echo "Success"
+else
+   echo "Failed"
+fi
+```
+
+## Meaning
+
+```text
+0 = success
+non-zero = failure
+```
+
+---
+
+# 13. Ansible Scripting
+
+## Example Playbook
+
+```yaml
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: install nginx
+      apt:
+        name: nginx
+        state: present
+```
+
+## Interview Answer
+
+> Ansible playbooks automate server configuration and deployment tasks.
+
+---
+
+# 14. Start Service Using Ansible
+
+## Start Service
+
+```yaml
+- name: start nginx
+  service:
+    name: nginx
+    state: started
+```
+
+## Enable at Boot
+
+```yaml
+- name: enable nginx
+  service:
+    name: nginx
+    enabled: yes
+```
+
+---
+
+# 15. Default Paths in Ansible
+
+| Item           | Path                     |
+| -------------- | ------------------------ |
+| ansible.cfg    | /etc/ansible/ansible.cfg |
+| Inventory File | /etc/ansible/hosts       |
+
+---
+
+# Important DevOps One-Liners
+
+| Topic       | One-Liner                  |
+| ----------- | -------------------------- |
+| Jenkins     | Automation server          |
+| Pipeline    | Automated workflow         |
+| Ansible     | Agentless automation tool  |
+| Bash        | Linux automation scripting |
+| SCP         | Secure file transfer       |
+| Credentials | Secure secret storage      |
+
+---
+
+# Real-Time CI/CD Workflow Example
+
+```text
+Developer pushes code
+        ↓
+GitHub webhook triggers Jenkins
+        ↓
+Jenkins pipeline starts
+        ↓
+Agent builds application
+        ↓
+Docker image created
+        ↓
+Image pushed to Docker Hub
+        ↓
+Kubernetes deploys application
+```
+
+---
+
+# Final Interview Tips
+
+* Explain practically
+* Use real-time examples
+* Explain workflow step-by-step
+* Mention security and automation benefits
+* Use simple language
+
+---
+
+# Final Summary
+
+This document covers Jenkins Master-Agent architecture, pipelines, integrations, credentials management, GitHub integration, Bash scripting, file transfer, Ansible automation, and common DevOps interview topics with practical explanations and examples.
