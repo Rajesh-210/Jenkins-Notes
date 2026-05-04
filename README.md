@@ -679,9 +679,22 @@ It is commonly used for deployments, backups, monitoring, file handling, and aut
 
 ## Methods
 
-* SCP
-* RSYNC
-* SSH
+* SCP    = Secure Copy Protocol
+Used to:
+✅ Copy files securely between servers
+Uses SSH internally 🔐
+
+* RSYNC  = Remote Sync
+Used to:
+✅ Synchronize files/directories
+✅ Faster than SCP for large data
+Only transfers changed files 🚀
+
+* SSH    = Secure Shell
+Used to:
+✅ Connect securely to remote server
+✅ Execute commands remotely
+
 
 ## Example
 
