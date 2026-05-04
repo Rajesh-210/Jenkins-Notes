@@ -468,25 +468,99 @@ post {
 
 ## Declarative Example
 
-```groovy
 pipeline {
     agent any
+
+    stages {
+
+        stage('Clone Code') {
+            steps {
+                echo 'Cloning code from GitHub'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building application using Maven'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running test cases'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline executed successfully'
+        }
+
+        failure {
+            echo 'Pipeline failed'
+        }
+    }
 }
-```
+
+How to Explain in Interview 🎤
+
+“This is a Declarative Pipeline.
+It uses a structured syntax with stages like Clone, Build, Test, and Deploy.
+
+The ‘agent any’ means the pipeline can run on any available Jenkins agent.
+
+Inside each stage, steps define the actions to execute.
+
+The post section handles success and failure conditions for notifications or alerts.”
 
 ## Scripted Example
 
-```groovy
 node {
+
+    stage('Clone Code') {
+        echo 'Cloning GitHub repository'
+    }
+
     stage('Build') {
-        echo 'Building'
+        echo 'Building application'
+    }
+
+    stage('Test') {
+        echo 'Executing test cases'
+    }
+
+    stage('Deploy') {
+        echo 'Deploying application'
+    }
+
+    try {
+        echo 'Pipeline Success'
+    }
+
+    catch(Exception e) {
+        echo 'Pipeline Failed'
     }
 }
-```
+
+How to Explain in Interview 🎤
+
+“This is a Scripted Pipeline.
+It uses Groovy-based scripting syntax and provides more flexibility compared to Declarative Pipeline.
+
+The pipeline starts with the node block, which defines the execution environment.
+
+Stages are manually written, and advanced conditions or loops can also be implemented in scripted pipelines.”
 
 ## Interview Answer
 
-> Jenkins supports Declarative and Scripted pipelines. Declarative is simpler while Scripted provides advanced flexibility.
+> Jenkins supports Declarative and Scripted pipelines. “Declarative pipeline is simple and structured, while Scripted pipeline provides advanced flexibility using Groovy scripting.”
 
 ---
 
@@ -570,6 +644,20 @@ tar -czf backup.tar.gz /data
 echo "Backup Completed"
 ```
 
+#!/bin/bash
+
+echo "Install apache2"
+
+apt install apache2 -y
+
+echo "Start apache"
+
+systemctl start apache2
+
+echo "Show the status"
+
+systemctl status apache2
+
 ## Use Cases
 
 * Backups
@@ -579,7 +667,11 @@ echo "Backup Completed"
 
 ## Interview Answer
 
-> Bash scripting automates repetitive Linux administration tasks.
+> “Bash scripting is used to automate repetitive Linux administration and deployment tasks.
+
+We write Linux commands inside a script file and execute them together.
+
+It is commonly used for deployments, backups, monitoring, file handling, and automation in DevOps environments.”
 
 ---
 
